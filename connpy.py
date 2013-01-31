@@ -1,4 +1,13 @@
 # encoding: utf-8
+"""
+    connpy
+    ~~~~~~
+
+    Search connpass events on CLI!
+
+    :copyright: (c) 2013 by drowse314-dev-ymat@github.com.
+    :licence: BSD
+"""
 
 import sys
 import argparse
@@ -158,7 +167,8 @@ def search():
     parser.add_argument('-n', '--nitem', type=int, default=3, help='items per page')
     parser.add_argument('-d', '--date', type=int,
                         help="date formed 'yyyymm' or 'yyyymmdd'")
-    parser.add_argument('-p', '--pagerize', action='store_false', default=True)
+    parser.add_argument('-p', '--pagerize_not', action='store_true', default=False,
+                        help='do not pagerize output')
     args = parser.parse_args()
     # Collect options.
     kwargs = {}
@@ -167,7 +177,7 @@ def search():
     kwargs['count'] = args.nitem
     kwargs['event_date'] = args.date
     # Search...
-    _search(args.pagerize, **kwargs)
+    _search(not args.pagerize_not, **kwargs)
 
 def browse():
     """Search command handler."""
