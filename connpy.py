@@ -121,14 +121,16 @@ def format_event(event):
     yield u''
 
 def events_printer(events):
-    n = 0
+    """Print events & returns items count."""
+    printed = 0
     for event in events:
-        n += 1
+        printed += 1
         for line in format_event(event):
             print(line)
-    return n
+    return printed
 
 def cli_pager(**options):
+    """Manage pagerizing event prints on CLI."""
     msg = '--next page? [y/n]--'
     evt_pages_gen = pagerized_search(**options)
     for events_generator in evt_pages_gen:
@@ -180,7 +182,7 @@ def search():
     _search(not args.pagerize_not, **kwargs)
 
 def browse():
-    """Search command handler."""
+    """Browse command handler."""
     parser = argparse.ArgumentParser(
         description='connpass event browser CLI v{}'.format(__version__)
     )
