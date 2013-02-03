@@ -16,7 +16,7 @@ import datetime
 import requests
 
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 __api_version__ = 'v1'
 
 
@@ -126,7 +126,7 @@ def events_printer(events):
     for event in events:
         printed += 1
         for line in format_event(event):
-            print(line)
+            print(line.encode(sys.stdout.encoding, 'ignore'))
     return printed
 
 def cli_pager(**options):
